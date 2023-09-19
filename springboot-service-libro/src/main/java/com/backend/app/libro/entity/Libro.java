@@ -3,23 +3,37 @@ package com.backend.app.libro.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Getter
 @Setter
 
 @Entity
+@Table(name = "libro")
 public class Libro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    
+    @Column(name = "numero_paginas")
     private int numeroPaginas;
+    
     private String autor;
     private String editorial;
+    
+    @Column(name="created_at")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createAt;
 
     public Libro() {
     }
@@ -65,5 +79,9 @@ public class Libro {
 
     public void setEditorial(String editorial) {
         this.editorial = editorial;
+    }
+    
+    public Date getCreateAt() {
+        return createAt;
     }
 }
