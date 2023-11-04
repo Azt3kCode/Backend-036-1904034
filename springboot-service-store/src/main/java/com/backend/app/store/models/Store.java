@@ -16,11 +16,11 @@ public class Store {
 		this.cantidad = cantidad;
 	}
 
-	public Laptop getCel() {
+	public Laptop getLap() {
 		return lap;
 	}
 
-	public void setCel(Laptop lap) {
+	public void setLap(Laptop lap) {
 		this.lap = lap;
 	}
 

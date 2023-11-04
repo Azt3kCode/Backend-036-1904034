@@ -40,6 +40,11 @@ public class LaptopController {
 	
 	@GetMapping("/laptop/{id}")
 	public Laptop detail(@PathVariable Long id) {
+		
+//		boolean bl = false;
+//		if (!bl) {
+//			throw new RuntimeException("No se pudo obtener el detalle de la laptop");
+//		}
 		return service.findById(id);
 	}
 	

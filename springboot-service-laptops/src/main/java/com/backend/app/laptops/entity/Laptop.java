@@ -41,6 +41,12 @@ public class Laptop implements Serializable{
 	@Transient
 	private Integer port;
 	
+	public Laptop(Long id, String name, String marca) {
+		this.id = id;
+		this.name = name;
+		this.marca = marca;
+	}
+	
 	/*
 	 *  Getters & Setters
 	 */
