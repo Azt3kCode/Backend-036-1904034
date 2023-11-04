@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,9 +23,12 @@ import com.backend.app.laptops.service.LaptopService;
 public class LaptopController {
 	
 	@Autowired
+	private Environment env;
+	
+	@Autowired
 	private LaptopService service;
 	
-	@Value("$(server.port")
+	@Value("$(server.port)")
 	private Integer port;
 	
 	@GetMapping("/list")
@@ -32,7 +36,7 @@ public class LaptopController {
 	    return service.findAll()
 	        .stream()
 	        .map(lap -> {
-	            lap.setPort(port);
+	            lap.setPort(Integer.parseInt(env.getProperty("local.server.port")));
 	            return lap;
 	        })
 	        .toList();
@@ -40,11 +44,12 @@ public class LaptopController {
 	
 	@GetMapping("/laptop/{id}")
 	public Laptop detail(@PathVariable Long id) {
-		
-//		boolean bl = false;
-//		if (!bl) {
-//			throw new RuntimeException("No se pudo obtener el detalle de la laptop");
-//		}
+
+		try {
+			Thread.sleep(2000L);
+		} catch(InterruptedException e) {
+			e.printStackTrace();
+		}
 		return service.findById(id);
 	}
 	
