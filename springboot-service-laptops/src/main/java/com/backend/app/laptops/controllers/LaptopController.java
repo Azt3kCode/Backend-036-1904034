@@ -27,6 +27,11 @@ public class LaptopController {
 		return service.findAll();
 	}
 	
+	@GetMapping("/laptop/{id}")
+	public Laptop detail(@PathVariable Long id) {
+		return service.findById(id);
+	}
+	
 	@DeleteMapping("/laptop/{id}")
 	public ResponseEntity<Void> drop(@PathVariable Long id) {
 		service.deleteById(id);
