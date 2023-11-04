@@ -1,8 +1,10 @@
 package com.backend.app.laptops.controllers;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,9 +24,18 @@ public class LaptopController {
 	@Autowired
 	private LaptopService service;
 	
+	@Value("$(server.port")
+	private Integer port;
+	
 	@GetMapping("/list")
-	public List<Laptop> list(){
-		return service.findAll();
+	public List<Laptop> list() {
+	    return service.findAll()
+	        .stream()
+	        .map(lap -> {
+	            lap.setPort(port);
+	            return lap;
+	        })
+	        .toList();
 	}
 	
 	@GetMapping("/laptop/{id}")
