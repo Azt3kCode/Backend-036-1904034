@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Obtener Ubicación</title>
+</head>
+<body>
+    <button id="obtener-ubicacion">Obtener Ubicación</button>
+    
+    <script>
+        document.getElementById("obtener-ubicacion").addEventListener("click", function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var latitud = position.coords.latitude;
+                    var longitud = position.coords.longitude;
+
+                    var ubicacion = {
+                        latitud: latitud,
+                        longitud: longitud
+                    };
+
+                    fetch('/guardar-ubicacion', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(ubicacion)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                    })
+                    .catch(error => {
+                        console.error('Error al enviar los datos de ubicación:', error);
+                    });
+                });
+            } else {
+                alert("La geolocalización no está disponible en este navegador.");
+            }
+        });
+    </script>
+</body>
+</html>

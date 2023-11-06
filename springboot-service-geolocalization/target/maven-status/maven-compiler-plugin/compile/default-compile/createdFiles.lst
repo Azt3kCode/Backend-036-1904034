@@ -1,0 +1,5 @@
+com\backend\app\geolocalitation\models\UbicacionRequest.class
+com\backend\app\geolocalitation\controllers\UbicacionController.class
+com\backend\app\geolocalitation\filters\LocationPostFilter.class
+com\backend\app\geolocalitation\SpringbootServiceGeolocalizationApplication.class
+com\backend\app\geolocalitation\filters\LocationPreFilter.class
