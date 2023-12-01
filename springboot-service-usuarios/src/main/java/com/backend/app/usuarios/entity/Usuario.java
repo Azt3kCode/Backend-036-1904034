@@ -1,12 +1,15 @@
 package com.backend.app.usuarios.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,7 +29,7 @@ public class Usuario implements Serializable {
 	@Column(unique = true, length = 20)
 	private String username;
 	
-	@Column(unique = true, length = 20)
+	@Column(unique = true, length = 100)
 	private String email;
 	
 	@Column(length = 60)
@@ -37,6 +40,18 @@ public class Usuario implements Serializable {
 	private String nombre;
 	
 	private String apellido;
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "usuarios_to_roles", 
+		joinColumns = @JoinColumn(name = "user_id"), 
+		inverseJoinColumns = @JoinColumn(name = "rooles_id"),
+		uniqueConstraints = (
+			@UniqueConstraint(
+				columnNames = ("user_id", "rooles_id")
+			)
+		)
+	)
+	private List<Role> roles;
 
 	public Long getId() {
 		return id;
@@ -92,6 +107,14 @@ public class Usuario implements Serializable {
 
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
+	}
+
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 	
 }
