@@ -3,11 +3,11 @@ package com.backend.app.usuarios.repository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
-
-import com.backend.app.usuarios.entity.Usuario;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.data.repository.query.Param;
+
+import com.backend.app.commons.users.entity.Usuario;
 
 @RepositoryRestResource(path = "usuarios")
 public interface UsuarioRepository extends PagingAndSortingRepository<Usuario, Long>{
