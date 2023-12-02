@@ -18,6 +18,10 @@ zuul:
   users:
    service-id: servicio-usuarios
    path: /api/us/**
+  oauth:
+   service-id: service-oauth
+   path: /api/security/**
+   sensitive-header: Cookie, Set-Cookie
 ribbon:
  ConnectTimeout: 3000
  ReadTimeout: 10000
